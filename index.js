@@ -64,8 +64,10 @@ app.post("/api/users/:_id/exercises", (req, res) => {
       });
       newExercise.save((err, data) => {
         if (err) return console.error(err);
+        const userId = data.user_id;
         delete data._doc.user_id
         delete data._doc.__v
+        data._doc._id = userId
         res.json(data);
       });
     });
